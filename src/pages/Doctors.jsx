@@ -1,19 +1,19 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar';
-import Chat from '../components/Chat';
 import MainNavbar from '../components/MainNavbar';
+import Directory from '../components/Directory';
 
-const Home = () => {
+const Doctors = () => {
   return (
-    <div className='home'>
+    <div className='doctors'>
         <div className='container'>
         <MainNavbar />
         <Sidebar />
-        <Chat />
+        <Directory type="doctor"/>
         
         </div>
     </div>
   )
 }
 
-export default Home
+export default Doctors;

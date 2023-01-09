@@ -4,6 +4,8 @@ import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
 import Message from "./Message";
 
+import '../styles/chat.styles.scss';
+
 const Messages = () => {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
@@ -17,7 +19,7 @@ const Messages = () => {
       unSub();
     };
   }, [data.chatId]);
-  console.log(messages);
+
   return (
     <div className="messages">
       {messages.map(m => (

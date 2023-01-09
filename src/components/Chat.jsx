@@ -5,7 +5,6 @@ import { ChatContext } from "../context/ChatContext";
 
 const Chat = () => {
   const {data} = useContext(ChatContext);
-  console.log(data.user.displayName);
   return (
     <>
     <div className="chat">

@@ -1,0 +1,20 @@
+.directory {
+    padding: 1rem;
+    &__user {
+      display: flex;
+      align-items: center;
+      padding: .5rem;
+      cursor: pointer;
+      &__img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        padding-right: 5px;
+      }
+
+      &__name {
+        font-size: 1.8rem;
+      }
+    }
+  }

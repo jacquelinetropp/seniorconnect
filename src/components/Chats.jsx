@@ -4,6 +4,8 @@ import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
 
+import '../styles/chat.styles.scss';
+
 const Chats = () => {
   const [chats, setChats] = useState([]);
   const { currentUser } = useContext(AuthContext);
@@ -11,7 +13,6 @@ const Chats = () => {
 
   useEffect(() => {
     const getChats = () => {
-      console.log(currentUser.uid);
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         setChats(doc.data());
       });
@@ -25,6 +26,7 @@ const Chats = () => {
   }, [currentUser.uid]);
 
   const handleSelect = (u) => {
+    console.log(u);
     dispatch({type:'CHANGE_USER', payload: u})
   }
 
