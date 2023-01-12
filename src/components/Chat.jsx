@@ -9,7 +9,7 @@ const Chat = () => {
     <>
     <div className="chat">
       <div className="chatInfo">
-        <span>{data.user?.displayName}</span>
+        <span>{data.user.displayName ? data.user.displayName : "Select a User"}</span>
       </div>
       <Messages />
       <Input />
