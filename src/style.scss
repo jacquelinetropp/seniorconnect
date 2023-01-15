@@ -17,7 +17,7 @@
   
   
   .home, .doctors, .residence {
-    background-color: #a7bcff;
+    background-color: #dae7fb;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -34,8 +34,9 @@
       overflow: hidden;
       @include tablet {
        width: 90%;
-       grid-template-rows: 70px min-content 1fr;
-       height: 90%;
+       grid-template-rows: 80px min-content 1fr;
+       height: 95%;
+       border: none;
       }
 
     }

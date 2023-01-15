@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
+import Menu from '../assets/menu.png';
 import Navbar from "./Navbar";
 import Search from "./Search";
 import Chats from "./Chats";
@@ -32,7 +33,7 @@ const Sidebar = () => {
       <div className="sidebar">
         <div className="sidebar__header">
           <button className="hamburger" onClick={() => setVisible(!visible)}>
-            Menu
+            <img src={Menu} alt="menu button" />
           </button>
           <Navbar />
         </div>
