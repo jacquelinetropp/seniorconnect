@@ -25,8 +25,9 @@ const Directory = ({type}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
     const data = async () => {
+      setLoading(true);
+      try {
       console.log('this is running');
       const q = query(collection(db, "users"), where("type", "==", type));
       console.log(q);
@@ -41,15 +42,13 @@ const Directory = ({type}) => {
       });
       console.log(searchResults);
       setLoading(false);
-    };
+    } catch(e) {
+      console.log(e);
+    }}
     return () => {
-      try {
-      data(); }
-      catch (e) {
-        console.log(e);
-      }
+      data();
     };
-  }, [searchResults]);
+  }, []);
 
   const handleSelect = async (user) => {
     const combinedId =
