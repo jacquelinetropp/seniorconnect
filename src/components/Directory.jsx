@@ -39,7 +39,11 @@ const Directory = ({type}) => {
       setLoading(false);
     };
     return () => {
-      data();
+      try {
+      data(); }
+      catch (e) {
+        console.log(e);
+      }
     };
   }, []);
 
