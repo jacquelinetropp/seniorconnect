@@ -28,7 +28,9 @@ const Directory = ({type}) => {
     setLoading(true);
     const data = async () => {
       const q = query(collection(db, "users"), where("type", "==", type));
+      console.log(q);
       const querySnapshot = await getDocs(q);
+      console.log(querySnapshot);
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         const notInArray = searchResults.some(u => u.uid === data.uid);
@@ -36,6 +38,7 @@ const Directory = ({type}) => {
           searchResults.push(data)
         }
       });
+      console.log(searchResults);
       setLoading(false);
     };
     return () => {
