@@ -15,39 +15,38 @@ import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ChatContext } from "../context/ChatContext";
 
-import '../styles/directory.styles.scss';
+import "../styles/directory.styles.scss";
 
-const Directory = ({type}) => {
+const Directory = ({ type }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  const {dispatch} = useContext(ChatContext);
+  const { dispatch } = useContext(ChatContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const data = async () => {
       setLoading(true);
       try {
-      console.log('this is running');
-      const q = query(collection(db, "users"), where("type", "==", type));
-      console.log(q);
-      const querySnapshot = await getDocs(q);
-      console.log(querySnapshot);
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const notInArray = searchResults.some(u => u.uid === data.uid);
-        if (notInArray === false) {
-          searchResults.push(data)
-        }
-      });
-      console.log(searchResults);
-      setLoading(false);
-    } catch(e) {
-      console.log(e);
-    }}
-    return () => {
-      data();
+        console.log("this is running");
+        const q = query(collection(db, "users"), where("type", "==", type));
+        console.log(q);
+        const querySnapshot = await getDocs(q);
+        console.log(querySnapshot);
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const notInArray = searchResults.some((u) => u.uid === data.uid);
+          if (notInArray === false) {
+            searchResults.push(data);
+          }
+        });
+        console.log(searchResults);
+        setLoading(false);
+      } catch (e) {
+        console.log(e);
+      }
     };
+    data();
   }, []);
 
   const handleSelect = async (user) => {
@@ -81,12 +80,11 @@ const Directory = ({type}) => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-      dispatch({type:'CHANGE_USER', payload: user})
-      navigate('/');
+      dispatch({ type: "CHANGE_USER", payload: user });
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
-   
   };
 
   if (loading) return <div>Loading</div>;
