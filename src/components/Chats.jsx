@@ -3,15 +3,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
+import { MobileNav } from "../context/MobileNav";
 import { db } from "../firebase";
 
-import '../styles/chat.styles.scss';
+import "../styles/chat.styles.scss";
 
 const Chats = () => {
   const [chats, setChats] = useState([]);
   const { currentUser } = useContext(AuthContext);
-  const {dispatch} = useContext(ChatContext);
+  const { dispatch } = useContext(ChatContext);
+  const { dispatch: altdispatch, data } = useContext(MobileNav);
   const navigate = useNavigate();
+
+  console.log(data.width);
 
   useEffect(() => {
     const getChats = () => {
@@ -28,22 +32,32 @@ const Chats = () => {
   }, [currentUser.uid]);
 
   const handleSelect = (u) => {
-    console.log(u);
-    dispatch({type:'CHANGE_USER', payload: u})
-    navigate('/');
-  }
+    dispatch({ type: "CHANGE_USER", payload: u });
+    if (data.width < 769) {
+      altdispatch({ type: "CLOSE" });
+    }
+    navigate("/");
+  };
 
   return (
     <div className="chats">
-      {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
-        <div className="userChat" key={chat[0]} onClick={() => {handleSelect(chat[1].userInfo)}}>
-          <img src={chat[1].userInfo.photoURL} alt="user" />
-          <div className="userChatInfo">
-            <span>{chat[1].userInfo.displayName}</span>
-            <p>{chat[1].lastMessage?.text}</p>
+      {Object.entries(chats)
+        ?.sort((a, b) => b[1].date - a[1].date)
+        .map((chat) => (
+          <div
+            className="userChat"
+            key={chat[0]}
+            onClick={() => {
+              handleSelect(chat[1].userInfo);
+            }}
+          >
+            <img src={chat[1].userInfo.photoURL} alt="user" />
+            <div className="userChatInfo">
+              <span>{chat[1].userInfo.displayName}</span>
+              <p>{chat[1].lastMessage?.text}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
