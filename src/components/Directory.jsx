@@ -27,6 +27,7 @@ const Directory = ({type}) => {
   useEffect(() => {
     setLoading(true);
     const data = async () => {
+      console.log('this is running');
       const q = query(collection(db, "users"), where("type", "==", type));
       console.log(q);
       const querySnapshot = await getDocs(q);
@@ -48,7 +49,7 @@ const Directory = ({type}) => {
         console.log(e);
       }
     };
-  }, []);
+  }, [searchResults]);
 
   const handleSelect = async (user) => {
     const combinedId =
