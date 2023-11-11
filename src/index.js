@@ -9,10 +9,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthContextProvider>
     <ChatContextProvider>
-    <MobileNavProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <MobileNavProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
       </MobileNavProvider>
     </ChatContextProvider>
   </AuthContextProvider>
