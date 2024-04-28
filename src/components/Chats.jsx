@@ -15,8 +15,6 @@ const Chats = () => {
   const { dispatch: altdispatch, data } = useContext(MobileNav);
   const navigate = useNavigate();
 
-  console.log(data.width);
-
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
@@ -38,6 +36,10 @@ const Chats = () => {
     }
     navigate("/");
   };
+
+  if (!chats) {
+    return 'No Chats yet'
+  }
 
   return (
     <div className="chats">
